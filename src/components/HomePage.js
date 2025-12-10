@@ -14,7 +14,7 @@ const HomePage = () => {
       title: 'Craftsmanship Redefined',
       subtitle: 'June Street',
       description: 'Where timeless tradition meets contemporary excellence in every detail',
-      accent: '#D4AF37'
+      accent: '#268BBA'
     },
     {
       image: '/images/placeholder.jpg',

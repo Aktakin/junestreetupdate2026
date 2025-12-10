@@ -108,7 +108,7 @@
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  background: linear-gradient(90deg, transparent, #268BBA, transparent);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -131,7 +131,7 @@
 }
 
 .nav-item:hover .nav-item-text {
-  color: #D4AF37;
+  color: #268BBA;
 }
 
 .nav-item:hover .nav-item-underline {
@@ -139,12 +139,12 @@
 }
 
 .nav-item.active .nav-item-text {
-  color: #D4AF37;
+  color: #268BBA;
 }
 
 .nav-item.active .nav-item-underline {
   width: 60%;
-  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  background: linear-gradient(90deg, transparent, #268BBA, transparent);
 }
 
 /* ============================================
@@ -159,8 +159,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #D4AF37;
-  border: 1px solid #D4AF37;
+  background: #268BBA;
+  border: 1px solid #268BBA;
   color: #0a0a0a;
   padding: 12px 28px;
   font-family: 'Inter', sans-serif;
@@ -192,7 +192,7 @@
 
 .nav-cta-button:hover {
   background: transparent;
-  color: #D4AF37;
+  color: #268BBA;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
 }
@@ -235,7 +235,7 @@
 
 .hamburger.active span:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
-  background: #D4AF37;
+  background: #268BBA;
 }
 
 .hamburger.active span:nth-child(2) {
@@ -245,7 +245,7 @@
 
 .hamburger.active span:nth-child(3) {
   transform: translateY(-9px) rotate(-45deg);
-  background: #D4AF37;
+  background: #268BBA;
 }
 
 /* ============================================
@@ -340,7 +340,7 @@
 .mobile-close:hover {
   background: rgba(212, 175, 55, 0.2);
   border-color: rgba(212, 175, 55, 0.5);
-  color: #D4AF37;
+  color: #268BBA;
   transform: rotate(90deg);
 }
 
@@ -390,7 +390,7 @@
   left: 0;
   width: 3px;
   height: 100%;
-  background: #D4AF37;
+  background: #268BBA;
   transform: scaleY(0);
   transition: transform 0.3s ease;
   transform-origin: bottom;
@@ -406,7 +406,7 @@
 .mobile-nav-item.active {
   background: rgba(212, 175, 55, 0.1);
   border-color: rgba(212, 175, 55, 0.3);
-  color: #D4AF37;
+  color: #268BBA;
   transform: translateX(5px);
 }
 
@@ -420,7 +420,7 @@
 
 .mobile-nav-item:hover .mobile-nav-number,
 .mobile-nav-item.active .mobile-nav-number {
-  color: #D4AF37;
+  color: #268BBA;
 }
 
 .mobile-nav-text {
@@ -451,8 +451,8 @@
   justify-content: center;
   gap: 12px;
   width: 100%;
-  background: #D4AF37;
-  border: 1px solid #D4AF37;
+  background: #268BBA;
+  border: 1px solid #268BBA;
   color: #0a0a0a;
   padding: 18px 28px;
   font-family: 'Inter', sans-serif;
@@ -467,7 +467,7 @@
 
 .mobile-cta-button:hover {
   background: transparent;
-  color: #D4AF37;
+  color: #268BBA;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
 }

@@ -3,9 +3,10 @@
    ============================================ */
 
 .footer {
-  position: relative;
   background: #0a0a0a;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 80px 20px 0;
+  position: relative;
   overflow: hidden;
 }
 
@@ -14,59 +15,37 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, #268BBA, transparent);
 }
 
-/* ============================================
-   FOOTER TOP SECTION
-   ============================================ */
-
-.footer-top {
-  padding: 100px 20px 60px;
-  position: relative;
-}
-
-.container {
+.footer-container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.footer-grid {
+.footer-main {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ============================================
-   BRAND COLUMN
-   ============================================ */
-
-.brand-column {
+/* Brand Section */
+.footer-brand {
   max-width: 400px;
 }
 
 .footer-logo {
-  cursor: pointer;
   margin-bottom: 25px;
-  display: inline-block;
-  transition: transform 0.3s ease;
 }
 
-.footer-logo:hover {
-  transform: scale(1.02);
-}
-
-.footer-logo-image {
-  height: 55px;
+.footer-logo img {
+  height: 50px;
   width: auto;
   object-fit: contain;
-  filter: brightness(1);
-  transition: filter 0.3s ease;
-}
-
-.footer-logo:hover .footer-logo-image {
   filter: brightness(1.1);
 }
 
@@ -75,73 +54,43 @@
   font-size: 0.95rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   font-weight: 300;
 }
 
 .footer-social {
   display: flex;
   gap: 15px;
-  align-items: center;
 }
 
 .social-link {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.6);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.social-link::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 100%;
-  height: 100%;
-  background: rgba(212, 175, 55, 0.1);
-  border-radius: 50%;
-  transition: transform 0.4s ease;
-}
-
-.social-link:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.social-link:hover {
-  color: #D4AF37;
-  border-color: rgba(212, 175, 55, 0.3);
-  background: rgba(212, 175, 55, 0.05);
-  transform: translateY(-3px);
 }
 
 .social-link svg {
   width: 18px;
   height: 18px;
-  position: relative;
-  z-index: 2;
-  transition: transform 0.3s ease;
 }
 
-.social-link:hover svg {
-  transform: scale(1.1);
+.social-link:hover {
+  background: rgba(38, 139, 186, 0.2);
+  border-color: #268BBA;
+  color: #268BBA;
+  transform: translateY(-3px);
 }
 
-/* ============================================
-   FOOTER COLUMNS
-   ============================================ */
-
-.footer-column {
+/* Footer Sections */
+.footer-section {
   display: flex;
   flex-direction: column;
 }
@@ -152,8 +101,8 @@
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 25px;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
   position: relative;
   padding-bottom: 15px;
 }
@@ -165,7 +114,7 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, #D4AF37, transparent);
+  background: #268BBA;
 }
 
 .footer-links {
@@ -193,37 +142,29 @@
   padding: 0;
   transition: all 0.3s ease;
   position: relative;
-  width: fit-content;
+  padding-left: 0;
 }
 
 .footer-link::before {
-  content: '';
+  content: '→';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #D4AF37;
-  transition: width 0.3s ease;
+  left: -20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: #268BBA;
 }
 
 .footer-link:hover {
-  color: #D4AF37;
-  padding-left: 8px;
+  color: #268BBA;
+  padding-left: 20px;
 }
 
 .footer-link:hover::before {
-  width: 100%;
+  opacity: 1;
+  left: 0;
 }
 
-/* ============================================
-   CONTACT COLUMN
-   ============================================ */
-
-.contact-column {
-  max-width: 300px;
-}
-
+/* Contact Info */
 .footer-contact {
   display: flex;
   flex-direction: column;
@@ -242,39 +183,17 @@
 }
 
 .contact-item svg {
-  color: #D4AF37;
+  color: #268BBA;
   flex-shrink: 0;
   margin-top: 2px;
-  opacity: 0.8;
 }
 
-.contact-item a {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-  color: #D4AF37;
-}
-
-.contact-item span {
-  flex: 1;
-}
-
-/* ============================================
-   FOOTER BOTTOM
-   ============================================ */
-
+/* Footer Bottom */
 .footer-bottom {
-  padding: 30px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.3);
+  padding: 40px 0;
 }
 
 .footer-bottom-content {
-  max-width: 1400px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -282,7 +201,7 @@
   gap: 20px;
 }
 
-.copyright {
+.footer-copyright {
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.4);
@@ -290,13 +209,13 @@
   margin: 0;
 }
 
-.footer-bottom-links {
+.footer-legal {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.footer-bottom-link {
+.legal-link {
   background: none;
   border: none;
   color: rgba(255, 255, 255, 0.4);
@@ -304,120 +223,43 @@
   font-size: 0.85rem;
   font-weight: 300;
   cursor: pointer;
-  padding: 0;
   transition: color 0.3s ease;
+  padding: 0;
 }
 
-.footer-bottom-link:hover {
-  color: #D4AF37;
+.legal-link:hover {
+  color: #268BBA;
 }
 
-.divider {
+.separator {
   color: rgba(255, 255, 255, 0.2);
-  font-size: 0.85rem;
 }
 
-/* ============================================
-   DECORATIVE ELEMENTS
-   ============================================ */
-
-.footer-decoration {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  overflow: hidden;
-}
-
-.decoration-line {
-  position: absolute;
-  bottom: 0;
-  left: -100%;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-  animation: slideLine 20s linear infinite;
-}
-
-@keyframes slideLine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-
+/* Responsive Design */
 @media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 50px;
-  }
-
-  .contact-column {
-    grid-column: 1 / -1;
-    max-width: 100%;
-  }
-
-  .footer-top {
-    padding: 80px 20px 50px;
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .footer-grid {
+  .footer {
+    padding: 60px 20px 0;
+  }
+
+  .footer-main {
     grid-template-columns: 1fr;
     gap: 40px;
-  }
-
-  .brand-column {
-    max-width: 100%;
-  }
-
-  .contact-column {
-    grid-column: 1;
-  }
-
-  .footer-top {
-    padding: 60px 20px 40px;
+    padding-bottom: 40px;
   }
 
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
-    gap: 15px;
   }
 
-  .footer-bottom-links {
+  .footer-legal {
     justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-social {
-    gap: 12px;
-  }
-
-  .social-link {
-    width: 38px;
-    height: 38px;
-  }
-
-  .social-link svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .footer-description {
-    font-size: 0.9rem;
-  }
-
-  .contact-item {
-    font-size: 0.85rem;
   }
 }
