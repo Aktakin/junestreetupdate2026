@@ -51,44 +51,19 @@
 .logo-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  color: #D4AF37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(1);
 }
 
-.navbar-logo:hover .logo-icon {
-  transform: rotate(15deg);
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
-.logo-main {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.05em;
-}
-
-.logo-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+.navbar-logo:hover .logo-image {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 /* ============================================
@@ -339,25 +314,13 @@
 
 .mobile-logo {
   display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+  align-items: center;
 }
 
-.mobile-logo span:first-child {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.05em;
-}
-
-.mobile-logo span:last-child {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+.mobile-logo-image {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
 }
 
 .mobile-close {
@@ -552,17 +515,8 @@
     display: flex;
   }
 
-  .logo-main {
-    font-size: 1rem;
-  }
-
-  .logo-sub {
-    font-size: 0.65rem;
-  }
-
-  .logo-icon {
-    width: 36px;
-    height: 36px;
+  .logo-image {
+    height: 40px;
   }
 }
 
