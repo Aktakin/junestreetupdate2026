@@ -78,7 +78,7 @@ const HomePage = () => {
       ),
       title: 'Signature Cuts',
       description: 'Precision-engineered hairstyles crafted to perfection',
-      price: 'From $45'
+      price: 'Book'
     },
     {
       icon: (
@@ -89,7 +89,7 @@ const HomePage = () => {
       ),
       title: 'Beard Mastery',
       description: 'Expert shaping and grooming for the distinguished gentleman',
-      price: 'From $35'
+      price: 'Book'
     },
     {
       icon: (
@@ -99,7 +99,7 @@ const HomePage = () => {
       ),
       title: 'Hot Towel Shave',
       description: 'Traditional straight razor experience with premium products',
-      price: 'From $55'
+      price: 'Book'
     },
     {
       icon: (
@@ -109,7 +109,7 @@ const HomePage = () => {
       ),
       title: 'Complete Grooming',
       description: 'Full-service experience from consultation to finishing',
-      price: 'From $85'
+      price: 'Book'
     }
   ];
 
