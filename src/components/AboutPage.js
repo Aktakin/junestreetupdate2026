@@ -39,7 +39,7 @@ const AboutPage = () => {
             </div>
             <div className="story-image">
               <div className="image-container">
-                <img src="/images/placeholder1.jpg" alt="JuneStreet Barbershop" />
+                <img src="/images/image2.jpg" alt="JuneStreet Barbershop" />
                 <div className="image-accent"></div>
               </div>
             </div>

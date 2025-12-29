@@ -10,14 +10,14 @@ const ServicesPage = () => {
       title: 'Haircut',
       description: 'Precision cuts tailored to your unique style. Our skilled barbers deliver clean, sharp results every time.',
       duration: '30-45 min',
-      image: '/images/placeholder1.jpg',
+      image: '/images/gallery1.jpg',
       popular: true
     },
     {
       title: 'Haircut w/Beard',
       description: 'Complete haircut and beard grooming package. The perfect combination for the well-groomed gentleman.',
       duration: '45-60 min',
-      image: '/images/placeholder2.jpg',
+      image: '/images/placeholder.jpg',
       popular: false
     },
     {
