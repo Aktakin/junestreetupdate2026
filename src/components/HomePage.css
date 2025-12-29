@@ -21,7 +21,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #0a0a0a;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +60,7 @@
 }
 
 .loader-path {
-  stroke: rgba(255, 255, 255, 0.2);
+  stroke: rgba(38, 139, 186, 0.2);
   stroke-dasharray: 283;
   stroke-dashoffset: 283;
   animation: loaderRotate 1.5s linear infinite, loaderDash 1.5s ease-in-out infinite;
@@ -79,15 +79,15 @@
 @keyframes loaderDash {
   0% {
     stroke-dashoffset: 283;
-    stroke: rgba(255, 255, 255, 0.2);
+    stroke: rgba(38, 139, 186, 0.2);
   }
   50% {
     stroke-dashoffset: 70;
-    stroke: rgba(255, 255, 255, 0.6);
+    stroke: rgba(38, 139, 186, 0.6);
   }
   100% {
     stroke-dashoffset: 283;
-    stroke: rgba(255, 255, 255, 0.2);
+    stroke: rgba(38, 139, 186, 0.2);
   }
 }
 

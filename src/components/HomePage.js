@@ -95,8 +95,8 @@ const HomePage = () => {
           <line x1="12" y1="11" x2="12" y2="13"/>
         </svg>
       ),
-      title: 'Haircut w/Beard',
-      description: 'Complete haircut and beard grooming package',
+      title: 'Beard/Shave Only',
+      description: 'Professional beard grooming and hot towel shave',
       price: 'Book'
     },
     {
@@ -329,10 +329,6 @@ const HomePage = () => {
               <div className="image-wrapper">
                 <div className="image-overlay-effect"></div>
                 <img src="/images/placeholder.jpg" alt="JuneStreet Barbershop" />
-                <div className="image-badge">
-                  <span>15+</span>
-                  <span>Years</span>
-                </div>
               </div>
             </div>
           </div>
