@@ -7,101 +7,98 @@ const ServicesPage = () => {
 
   const services = [
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-      ),
-      title: 'Signature Cuts',
-      description: 'Precision-engineered hairstyles crafted to perfection. Our master barbers use traditional techniques combined with modern styling.',
-      features: ['Consultation included', 'Premium products', 'Styling & finishing'],
-      duration: '45-60 min'
+      title: 'Haircut',
+      description: 'Precision cuts tailored to your unique style. Our skilled barbers deliver clean, sharp results every time.',
+      duration: '30-45 min',
+      image: '/images/placeholder1.jpg',
+      popular: true
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      ),
-      title: 'Beard Mastery',
-      description: 'Expert shaping and grooming for the distinguished gentleman. Achieve the perfect beard style with professional tools and techniques.',
-      features: ['Beard trim & shape', 'Hot towel treatment', 'Premium oils'],
-      duration: '30-45 min'
+      title: 'Haircut w/Beard',
+      description: 'Complete haircut and beard grooming package. The perfect combination for the well-groomed gentleman.',
+      duration: '45-60 min',
+      image: '/images/placeholder2.jpg',
+      popular: false
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-        </svg>
-      ),
-      title: 'Hot Towel Shave',
-      description: 'Traditional straight razor experience with premium products. Experience the classic barbershop shave in its finest form.',
-      features: ['Hot towel prep', 'Straight razor shave', 'Aftershave treatment'],
-      duration: '30 min'
+      title: 'Line Up',
+      description: 'Clean, sharp edges and precise lines. Perfect for maintaining your look between full haircuts.',
+      duration: '15-20 min',
+      image: '/images/image2.jpg',
+      popular: false
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M20 7h-4M4 7h4m12 0v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7m16 0V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
-        </svg>
-      ),
-      title: 'Complete Grooming',
-      description: 'Full-service experience from consultation to finishing. The ultimate barbershop package for the modern gentleman.',
-      features: ['Haircut & styling', 'Beard trim', 'Hot towel shave', 'Hair wash'],
-      duration: '90 min'
+      title: 'Kids Cut',
+      description: 'Gentle, patient service for our younger clients. Making haircuts a great experience for kids.',
+      duration: '20-30 min',
+      image: '/images/gallery1.jpg',
+      popular: false
+    },
+    {
+      title: 'VIP Service',
+      description: 'The ultimate premium grooming experience. Full service treatment with extra attention to detail.',
+      duration: '60-90 min',
+      image: '/images/gallery2.jpg',
+      popular: false
+    },
+    {
+      title: 'Beard/Shave Only',
+      description: 'Expert beard shaping, trimming, or traditional hot towel shave. For the distinguished gentleman.',
+      duration: '20-30 min',
+      image: '/images/gallery3.jpg',
+      popular: false
+    },
+    {
+      title: 'House Calls',
+      description: 'Premium barber services at your location. Convenience meets quality for busy professionals.',
+      duration: 'Varies',
+      image: '/images/gallery4.jpg',
+      popular: false
+    },
+    {
+      title: 'Before/After Hours',
+      description: 'Flexible scheduling outside regular hours. Book early morning or late evening appointments.',
+      duration: 'Varies',
+      image: '/images/gallery5.jpg',
+      popular: false
     }
   ];
 
+
   return (
     <div className="services-page">
+      {/* Hero Section */}
       <section className="services-hero">
+        <div className="hero-background">
+          <div className="hero-overlay"></div>
+        </div>
         <div className="container">
           <div className="hero-content">
             <span className="page-label">Our Services</span>
-            <h1 className="page-title">Premium Grooming Services</h1>
+            <h1 className="page-title">Our Services</h1>
             <p className="page-description">
-              Experience the finest in men's grooming with our expertly crafted services. 
-              Each treatment is designed to elevate your style and confidence.
+              At JuneStreet, every service is rooted in precision, intention, and respect for the craft. From clean fades and sharp lineups to classic cuts and detailed grooming, we take the time to understand your style and deliver consistent, high-quality results. Our approach blends traditional barbering techniques with modern expression, all within a professional, culture-driven space where every client is treated with care and attention.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Services Grid */}
       <section className="services-list">
         <div className="container">
           <div className="services-grid">
             {services.map((service, index) => (
-              <div key={index} className="service-card-detailed">
-                <div className="service-header">
-                  <div className="service-icon-wrapper">
-                    <div className="service-icon">{service.icon}</div>
-                    <div className="service-icon-bg"></div>
-                  </div>
-                  <div className="service-duration">{service.duration}</div>
+              <div 
+                key={index} 
+                className={`service-card-detailed ${service.popular ? 'popular' : ''}`}
+                style={{ '--delay': `${index * 0.1}s` }}
+              >
+                <div className="service-image" style={{ backgroundImage: `url(${service.image})` }}>
+                  <div className="service-image-overlay"></div>
+                  {service.popular && <span className="popular-badge">Most Popular</span>}
                 </div>
                 <div className="service-content-detailed">
                   <h3 className="service-title-detailed">{service.title}</h3>
-                  <p className="service-description-detailed">{service.description}</p>
-                  <ul className="service-features">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <button 
-                    className="service-book-btn"
-                    onClick={() => navigate('/bookings')}
-                  >
-                    Book Now
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </button>
                 </div>
               </div>
             ))}
@@ -109,17 +106,30 @@ const ServicesPage = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="services-cta-section">
         <div className="container">
           <div className="cta-content-services">
-            <h2>Ready to Experience Excellence?</h2>
-            <p>Book your appointment today and discover the June Street difference</p>
-            <button 
-              className="cta-button-services"
-              onClick={() => navigate('/bookings')}
-            >
-              Schedule Appointment
-            </button>
+            <span className="cta-label">Ready to Experience Excellence?</span>
+            <h2>Book Your Appointment Today</h2>
+            <p>Transform your look with our premium grooming services</p>
+            <div className="cta-buttons">
+              <button 
+                className="cta-button-primary"
+                onClick={() => navigate('/bookings')}
+              >
+                Schedule Appointment
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              <button 
+                className="cta-button-secondary"
+                onClick={() => navigate('/contact')}
+              >
+                Contact Us
+              </button>
+            </div>
           </div>
         </div>
       </section>

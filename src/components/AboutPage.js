@@ -5,112 +5,134 @@ import './AboutPage.css';
 const AboutPage = () => {
   const navigate = useNavigate();
 
-  const values = [
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
-      ),
-      title: 'Excellence',
-      description: 'Uncompromising quality in every service we provide'
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-      ),
-      title: 'Tradition',
-      description: 'Honoring time-tested barbering techniques'
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-      ),
-      title: 'Innovation',
-      description: 'Embracing modern styling and techniques'
-    }
-  ];
-
   return (
     <div className="about-page">
+      {/* Hero Section */}
       <section className="about-hero">
+        <div className="hero-background">
+          <div className="hero-overlay"></div>
+        </div>
         <div className="container">
           <div className="hero-content-about">
-            <span className="page-label">Our Story</span>
-            <h1 className="page-title">Crafting Excellence Since 2008</h1>
+            <span className="page-label">About JuneStreet Barbershop</span>
+            <h1 className="page-title">Who We Are</h1>
             <p className="page-description">
-              At June Street Barbershop, we've redefined the art of men's grooming. 
-              Our master barbers bring decades of combined experience, blending time-honored 
-              techniques with contemporary innovation.
+              JuneStreet Barbershop is built on craft, shaped by culture, and sustained by community.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Who We Are Section */}
       <section className="about-story">
         <div className="container">
           <div className="story-content">
             <div className="story-text">
-              <h2>Our Heritage</h2>
+              <span className="section-label">Who We Are</span>
+              <h2>JuneStreet Barbershop</h2>
               <p>
-                Founded in 2008, June Street Barbershop was born from a passion for 
-                traditional barbering and a vision to create a space where men could 
-                experience the finest in grooming services.
+                We are a collective of skilled barbers who take pride in the art of barbering — the precision, the discipline, and the details that separate a good cut from a great one. Every service is intentional. Every client is personal. Every chair carries responsibility.
               </p>
               <p>
-                Over the years, we've built a reputation for excellence, serving thousands 
-                of clients who trust us with their style. Our barbers are not just skilled 
-                professionals—they're artists dedicated to their craft.
-              </p>
-              <p>
-                Every visit to June Street is more than a haircut; it's an experience. 
-                From the moment you step through our doors, you're enveloped in an 
-                atmosphere of refined elegance and meticulous attention to detail.
+                JuneStreet is a space where tradition meets modern expression — where classic technique, contemporary style, and cultural authenticity live side by side. We exist to serve our community with consistency, respect, and excellence, creating more than just fresh cuts — we create confidence, connection, and belonging.
               </p>
             </div>
             <div className="story-image">
-              <img src="/images/placeholder.jpg" alt="June Street Barbershop" />
+              <div className="image-container">
+                <img src="/images/placeholder1.jpg" alt="JuneStreet Barbershop" />
+                <div className="image-accent"></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="about-values">
+      {/* Mission Section */}
+      <section className="about-mission">
         <div className="container">
-          <div className="values-header">
-            <h2>Our Values</h2>
-            <p>What drives us every day</p>
-          </div>
-          <div className="values-grid">
-            {values.map((value, index) => (
-              <div key={index} className="value-card">
-                <div className="value-icon">{value.icon}</div>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
-              </div>
-            ))}
+          <div className="mission-content">
+            <span className="section-label">Our Mission</span>
+            <h2>Our Mission</h2>
+            <p>
+              To honor the craft of barbering while serving our community with consistency, care and providing an elevated experience rooted in skill, culture, and genuine connection.
+            </p>
           </div>
         </div>
       </section>
 
+      {/* Vision Section */}
+      <section className="about-vision">
+        <div className="container">
+          <div className="vision-content">
+            <span className="section-label">Our Vision</span>
+            <h2>Our Vision</h2>
+            <p>
+              To be a barbershop that represents the highest level of craft, stands as a cultural cornerstone, and serves as a trusted space for the community.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values Section */}
+      <section className="about-values">
+        <div className="container">
+          <div className="values-content">
+            <span className="section-label">Our Core Values</span>
+            <h2>Our Core Values</h2>
+            <div className="values-grid">
+              <div className="value-card">
+                <h3>Craft</h3>
+                <p>
+                  We respect the art. Technique, precision, and attention to detail are non-negotiable. Our work reflects years of practice and a commitment to mastery.
+                </p>
+              </div>
+              <div className="value-card">
+                <h3>Culture</h3>
+                <p>
+                  JuneStreet is rooted in the culture that shaped us. We create a space where authenticity is celebrated and expression is welcomed.
+                </p>
+              </div>
+              <div className="value-card">
+                <h3>Community</h3>
+                <p>
+                  We exist because of our community. Every client matters. Every relationship matters. We serve with humility and purpose.
+                </p>
+              </div>
+              <div className="value-card">
+                <h3>Consistency</h3>
+                <p>
+                  Excellence is not occasional — it's habitual. We show up prepared, professional, and locked in every day.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
       <section className="about-cta">
         <div className="container">
           <div className="cta-content-about">
-            <h2>Experience the June Street Difference</h2>
-            <p>Book your appointment and discover why we're the trusted choice for gentlemen who demand excellence</p>
-            <button 
-              className="cta-button-about"
-              onClick={() => navigate('/bookings')}
-            >
-              Book Your Visit
-            </button>
+            <span className="cta-label">Ready to Experience the Difference?</span>
+            <h2>Book Your Visit Today</h2>
+            <p>Join thousands of gentlemen who trust JuneStreet for their grooming needs</p>
+            <div className="cta-buttons">
+              <button 
+                className="cta-button-primary"
+                onClick={() => navigate('/bookings')}
+              >
+                Book Appointment
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              <button 
+                className="cta-button-secondary"
+                onClick={() => navigate('/contact')}
+              >
+                Contact Us
+              </button>
+            </div>
           </div>
         </div>
       </section>

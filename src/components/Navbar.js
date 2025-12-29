@@ -33,8 +33,9 @@ const Navbar = () => {
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
     { path: '/about', label: 'About' },
-    { path: '/bookings', label: 'Bookings' },
-    { path: '/contact', label: 'Contact' }
+    { path: '/bookings', label: 'Book' },
+    { path: '/contact', label: 'Contact' },
+    { path: '/careers', label: 'Careers' }
   ];
 
   const handleNavClick = (path) => {
@@ -53,7 +54,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-logo" onClick={() => handleNavClick('/')}>
           <div className="logo-wrapper">
-            <img src="/images/logo.png" alt="June Street Barbershop" className="logo-image" />
+            <img src="/images/logo.png" alt="JuneStreet Barbershop" className="logo-image" />
           </div>
         </div>
 
@@ -102,7 +103,7 @@ const Navbar = () => {
         <div className="mobile-menu-content">
           <div className="mobile-menu-header">
             <div className="mobile-logo">
-              <img src="/images/logo.png" alt="June Street Barbershop" className="mobile-logo-image" />
+              <img src="/images/logo.png" alt="JuneStreet Barbershop" className="mobile-logo-image" />
             </div>
             <button className="mobile-close" onClick={toggleMenu}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
