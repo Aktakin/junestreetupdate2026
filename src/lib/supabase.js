@@ -9,6 +9,12 @@ const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 let supabase = null;
 if (supabaseUrl && supabaseAnonKey) {
   supabase = createClient(supabaseUrl, supabaseAnonKey);
+  console.log('Supabase client initialized');
+} else {
+  console.warn('Supabase not configured. Missing:', {
+    url: !supabaseUrl,
+    key: !supabaseAnonKey
+  });
 }
 
 // Fallback: Local storage keys (used if Supabase is not configured)
@@ -77,15 +83,18 @@ const defaultBarbers = [
 export const signIn = async (email, password) => {
   if (supabase) {
     // Use Supabase authentication
+    console.log('Attempting Supabase login for:', email);
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     
     if (error) {
+      console.error('Supabase login error:', error);
       return { data: null, error };
     }
     
+    console.log('Supabase login successful');
     return { data: data.session, error: null };
   } else {
     // Fallback to local auth (for development)

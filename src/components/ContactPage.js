@@ -85,8 +85,8 @@ const ContactPage = () => {
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
         </svg>
       ),
-      url: 'https://www.instagram.com/junestreet.barbershop',
-      handle: '@junestreet.barbershop'
+      url: 'https://www.instagram.com/junestreetbarbershop',
+      handle: '@junestreetbarbershop'
     },
     {
       name: 'Facebook',

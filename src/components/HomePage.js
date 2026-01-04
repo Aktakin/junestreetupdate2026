@@ -114,30 +114,23 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      name: 'Michael Thompson',
-      role: 'Business Executive',
-      content: 'JuneStreet has completely transformed my grooming routine. The attention to detail and professionalism is unmatched. Every visit feels like a premium experience.',
+      name: 'Mercedees James',
+      role: 'Local Guide',
+      content: 'First time here ! Zack was so patient with my son and you can tell he takes pride and attention to detail with work very well! See you in 2 weeks !',
       rating: 5,
       image: '/images/placeholder.jpg'
     },
     {
-      name: 'David Chen',
-      role: 'Creative Director',
-      content: 'I\'ve been to many barbershops, but none compare to JuneStreet. The master barbers here truly understand the art of men\'s grooming. Highly recommended!',
+      name: 'Y Lockett',
+      role: 'Local Guide',
+      content: 'Great place, with great people!! Come check it out!! Everyone is friendly & professional. Appointments are necessary here as each barber takes their time giving you the best cut. No rushing you out the chair, no long wait time, and no over booking. I recommend calling a day ahead to get your desired time.',
       rating: 5,
       image: '/images/placeholder.jpg'
     },
     {
-      name: 'James Wilson',
-      role: 'Attorney',
-      content: 'The hot towel shave is an experience everyone should try at least once. The ambiance, the service, everything is perfectly curated for relaxation.',
-      rating: 5,
-      image: '/images/placeholder.jpg'
-    },
-    {
-      name: 'Robert Martinez',
-      role: 'Entrepreneur',
-      content: 'From the moment you walk in, you know you\'re in good hands. The staff is professional, skilled, and genuinely care about their craft.',
+      name: 'Y Lockett',
+      role: 'Local Guide',
+      content: 'I had a really good time and experience here. The vibe is dope and the barbers are good too. My barber was great and not only was my haircut fire, the other people in the other chair looked fire too. My barber was Staff in the first chair. Check them out and grab your appointments off Booksy or call the shop to see if anyone has availability. They will work with you.',
       rating: 5,
       image: '/images/placeholder.jpg'
     }
@@ -151,7 +144,7 @@ const HomePage = () => {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
       ),
-      url: 'https://www.instagram.com/junestreet.barbershop'
+      url: 'https://www.instagram.com/junestreetbarbershop'
     },
     { 
       name: 'Facebook', 
