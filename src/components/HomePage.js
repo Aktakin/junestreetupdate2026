@@ -96,7 +96,7 @@ const HomePage = () => {
         </svg>
       ),
       title: 'Beard/Shave Only',
-      description: 'Professional beard grooming and hot towel shave',
+      description: 'Professional beard grooming and shave',
       price: 'Book'
     },
     {
@@ -115,21 +115,21 @@ const HomePage = () => {
   const testimonials = [
     {
       name: 'Mercedees James',
-      role: 'Local Guide',
+      role: '',
       content: 'First time here ! Zack was so patient with my son and you can tell he takes pride and attention to detail with work very well! See you in 2 weeks !',
       rating: 5,
       image: '/images/placeholder.jpg'
     },
     {
       name: 'Y Lockett',
-      role: 'Local Guide',
+      role: '',
       content: 'Great place, with great people!! Come check it out!! Everyone is friendly & professional. Appointments are necessary here as each barber takes their time giving you the best cut. No rushing you out the chair, no long wait time, and no over booking. I recommend calling a day ahead to get your desired time.',
       rating: 5,
       image: '/images/placeholder.jpg'
     },
     {
       name: 'Y Lockett',
-      role: 'Local Guide',
+      role: '',
       content: 'I had a really good time and experience here. The vibe is dope and the barbers are good too. My barber was great and not only was my haircut fire, the other people in the other chair looked fire too. My barber was Staff in the first chair. Check them out and grab your appointments off Booksy or call the shop to see if anyone has availability. They will work with you.',
       rating: 5,
       image: '/images/placeholder.jpg'
@@ -208,7 +208,7 @@ const HomePage = () => {
         >
           <div className="hero-column-overlay"></div>
           <div className="hero-column-content">
-            <span className="hero-column-label">Dark Beard</span>
+            <span className="hero-column-label">June Street</span>
             <h2 className="hero-column-title">Bookings</h2>
             <p className="hero-column-description">
               Schedule your grooming session with our professional barbers. Experience the finest in traditional barbering.

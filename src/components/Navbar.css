@@ -210,7 +210,7 @@
    ============================================ */
 
 .hamburger {
-  display: none;
+  display: none !important;
   flex-direction: column;
   justify-content: space-between;
   width: 28px;
@@ -512,7 +512,7 @@
   }
 
   .hamburger {
-    display: flex;
+    display: none !important;
   }
 
   .logo-image {

@@ -24,28 +24,28 @@ const ServicesPage = () => {
       title: 'Line Up',
       description: 'Clean, sharp edges and precise lines. Perfect for maintaining your look between full haircuts.',
       duration: '15-20 min',
-      image: '/images/image2.jpg',
+      image: '/images/lineup.jpg',
       popular: false
     },
     {
       title: 'Kids Cut',
       description: 'Gentle, patient service for our younger clients. Making haircuts a great experience for kids.',
       duration: '20-30 min',
-      image: '/images/gallery1.jpg',
+      image: '/images/kidsi.jpg',
       popular: false
     },
     {
       title: 'VIP Service',
       description: 'The ultimate premium grooming experience. Full service treatment with extra attention to detail.',
       duration: '60-90 min',
-      image: '/images/gallery2.jpg',
+      image: '/images/vip.jpg',
       popular: false
     },
     {
       title: 'Beard/Shave Only',
       description: 'Expert beard shaping, trimming, or traditional hot towel shave. For the distinguished gentleman.',
       duration: '20-30 min',
-      image: '/images/gallery3.jpg',
+      image: '/images/shaveonlyi.jpg',
       popular: false
     },
     {
