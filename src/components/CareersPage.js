@@ -15,6 +15,8 @@ const CareersPage = () => {
     images: []
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e) => {
@@ -67,9 +69,80 @@ const CareersPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Prepare form data for Web3Forms
+      const formDataToSend = new FormData();
+      
+      // Web3Forms requires 'access_key' field
+      formDataToSend.append('access_key', process.env.REACT_APP_WEB3FORMS_KEY || 'c54cc754-719c-4892-a1ae-014e812f0846');
+      
+      // Form subject
+      formDataToSend.append('subject', 'New Career Application - JuneStreet Barbershop');
+      
+      // Form data
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('experience', formData.experience);
+      formDataToSend.append('licenseNumber', formData.licenseNumber || 'N/A');
+      formDataToSend.append('instagram', formData.instagram || 'N/A');
+      formDataToSend.append('facebook', formData.facebook || 'N/A');
+      formDataToSend.append('tiktok', formData.tiktok || 'N/A');
+      
+      // Format message body
+      const messageBody = `
+New Career Application Received
+
+Personal Information:
+- Name: ${formData.firstName} ${formData.lastName}
+- Phone: ${formData.phone}
+- Email: ${formData.email}
+
+Professional Information:
+- Years of Experience: ${formData.experience}
+- License Number: ${formData.licenseNumber || 'N/A'}
+
+Social Media:
+- Instagram: ${formData.instagram || 'N/A'}
+- Facebook: ${formData.facebook || 'N/A'}
+- TikTok: ${formData.tiktok || 'N/A'}
+      `.trim();
+      
+      formDataToSend.append('message', messageBody);
+      
+      // Add images if any
+      const imageInput = document.getElementById('images');
+      if (imageInput && imageInput.files && imageInput.files.length > 0) {
+        Array.from(imageInput.files).forEach((file) => {
+          formDataToSend.append('images', file);
+        });
+      }
+
+      // Send to Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+      } else {
+        throw new Error(data.message || 'Failed to submit application');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitError(error.message || 'Failed to submit application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -131,6 +204,21 @@ const CareersPage = () => {
                 <h2>Join Our Team</h2>
                 <p>Fill out the form below and show us your best work</p>
               </div>
+              {submitError && (
+                <div className="form-error" style={{
+                  maxWidth: '800px',
+                  margin: '0 auto 20px',
+                  padding: '15px 20px',
+                  background: 'rgba(255, 68, 68, 0.1)',
+                  border: '1px solid rgba(255, 68, 68, 0.3)',
+                  borderRadius: '8px',
+                  color: '#ff4444',
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.9rem'
+                }}>
+                  {submitError}
+                </div>
+              )}
               <form className="application-form" onSubmit={handleSubmit}>
                 <div className="form-section">
                   <h3>Personal Information</h3>
@@ -207,14 +295,13 @@ const CareersPage = () => {
                       </select>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="licenseNumber">License Number *</label>
+                      <label htmlFor="licenseNumber">License Number</label>
                       <input
                         type="text"
                         id="licenseNumber"
                         name="licenseNumber"
                         value={formData.licenseNumber}
                         onChange={handleChange}
-                        required
                         placeholder="Your barber license number"
                       />
                     </div>
@@ -335,11 +422,13 @@ const CareersPage = () => {
                   )}
                 </div>
 
-                <button type="submit" className="submit-button">
-                  Submit Application
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
+                <button type="submit" className="submit-button" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                  {!isSubmitting && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  )}
                 </button>
               </form>
             </>
