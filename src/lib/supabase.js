@@ -186,34 +186,51 @@ export const getBarbers = async (includeHidden = false) => {
       const { data, error } = await query;
       
       if (error) {
-        console.error('Error fetching barbers:', error);
-        return [];
+        console.error('Error fetching barbers from Supabase:', error);
+        // If Supabase is paused or unavailable, fall back to localStorage
+        console.warn('Falling back to localStorage due to Supabase error');
+        return getBarbersFromStorage(includeHidden);
+      }
+      
+      // If no data returned and Supabase might be paused, try fallback
+      if (!data || data.length === 0) {
+        console.warn('No barbers found in Supabase, checking localStorage fallback');
+        const fallback = getBarbersFromStorage(includeHidden);
+        if (fallback.length > 0) {
+          return fallback;
+        }
       }
       
       return data || [];
     } catch (error) {
-      console.error('Error fetching barbers:', error);
-      return [];
+      console.error('Exception fetching barbers from Supabase:', error);
+      // Fall back to localStorage on any exception
+      return getBarbersFromStorage(includeHidden);
     }
   } else {
     // Fallback to localStorage
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const barbers = JSON.parse(stored);
-        const sorted = [...barbers].sort((a, b) => a.display_order - b.display_order);
-        if (includeHidden) {
-          return sorted;
-        }
-        return sorted.filter(b => b.is_visible);
+    return getBarbersFromStorage(includeHidden);
+  }
+};
+
+// Helper function to get barbers from localStorage
+const getBarbersFromStorage = (includeHidden = false) => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const barbers = JSON.parse(stored);
+      const sorted = [...barbers].sort((a, b) => a.display_order - b.display_order);
+      if (includeHidden) {
+        return sorted;
       }
-      // Initialize with defaults
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultBarbers));
-      return includeHidden ? defaultBarbers : defaultBarbers.filter(b => b.is_visible);
-    } catch (e) {
-      console.error('Storage error:', e);
-      return includeHidden ? defaultBarbers : defaultBarbers.filter(b => b.is_visible);
+      return sorted.filter(b => b.is_visible);
     }
+    // Initialize with defaults
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultBarbers));
+    return includeHidden ? defaultBarbers : defaultBarbers.filter(b => b.is_visible);
+  } catch (e) {
+    console.error('Storage error:', e);
+    return includeHidden ? defaultBarbers : defaultBarbers.filter(b => b.is_visible);
   }
 };
 
