@@ -173,6 +173,9 @@
   border-radius: 4px;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 44px;
 }
 
 .nav-cta-button::before {
@@ -210,7 +213,7 @@
    ============================================ */
 
 .hamburger {
-  display: none !important;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 28px;
@@ -218,9 +221,10 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 8px 4px;
   z-index: 1001;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hamburger span {
@@ -297,6 +301,7 @@
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.active .mobile-menu-content {
@@ -324,8 +329,8 @@
 }
 
 .mobile-close {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
@@ -335,6 +340,8 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .mobile-close:hover {
@@ -374,6 +381,9 @@
   opacity: 0;
   transform: translateX(30px);
   animation: slideInRight 0.5s ease var(--delay, 0s) forwards;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 60px;
 }
 
 @keyframes slideInRight {
@@ -512,7 +522,7 @@
   }
 
   .hamburger {
-    display: none !important;
+    display: flex !important;
   }
 
   .logo-image {
@@ -521,13 +531,47 @@
 }
 
 @media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 15px;
+    height: 65px;
+  }
+
+  .logo-image {
+    height: 35px;
+  }
+
+  .hamburger {
+    width: 24px;
+    height: 18px;
+  }
+
   .mobile-menu-content {
     max-width: 100%;
-    padding: 80px 30px 30px;
+    padding: 70px 20px 30px;
+  }
+
+  .mobile-menu-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+
+  .mobile-logo-image {
+    height: 40px;
   }
 
   .mobile-nav-item {
     padding: 18px 20px;
     font-size: 0.9rem;
+    gap: 15px;
+  }
+
+  .mobile-nav-number {
+    min-width: 25px;
+    font-size: 0.7rem;
+  }
+
+  .mobile-cta-button {
+    padding: 16px 24px;
+    font-size: 0.85rem;
   }
 }

@@ -9,6 +9,7 @@
   overflow-x: hidden;
   background: #0a0a0a;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ============================================
@@ -2384,7 +2385,7 @@
 
   .hero-column {
     min-height: 450px;
-    padding: 40px 25px;
+    padding: 40px 20px;
   }
 
   .hero-column-title {
@@ -2409,6 +2410,14 @@
     font-size: 0.85rem;
   }
 
+  .hero-column-btn {
+    min-height: 48px;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
   .hero-cta-btn {
     flex-direction: column;
   }
@@ -2417,6 +2426,7 @@
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     padding: 12px 20px;
+    min-height: 48px;
   }
 
   .nav-dot {
@@ -2426,11 +2436,26 @@
   .cta-buttons {
     flex-direction: column;
     width: 100%;
+    gap: 15px;
   }
 
   .cta-button-large {
     width: 100%;
     justify-content: center;
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .service-card {
+    padding: 40px 25px;
+    min-height: auto;
+  }
+
+  .service-price {
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .stats-grid {
@@ -2461,6 +2486,8 @@
   .social-icon-wrapper {
     width: 100px;
     height: 100px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .social-icon-wrapper svg {

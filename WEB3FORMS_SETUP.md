@@ -48,3 +48,4 @@ If using environment variables (Option A):
 ## Security Note
 Never commit your access key to GitHub. Always use environment variables for production.
 
+
