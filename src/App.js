@@ -47,7 +47,7 @@ function App() {
           <Route path="/bookings" element={<BookingsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/careers" element={<CareersPage />} />
-          <Route path="/admin3082072" element={<AdminPage />} />
+          <Route path="/jsadmin" element={<AdminPage />} />
         </Routes>
       </Layout>
     </Router>
