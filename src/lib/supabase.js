@@ -356,3 +356,150 @@ export const deleteBarber = async (id) => {
 export const toggleBarberVisibility = async (id, isVisible) => {
   return updateBarber(id, { is_visible: isVisible });
 };
+
+// ============================================
+// BARBER PROFILE IMAGE UPLOAD (Supabase Storage)
+// ============================================
+
+const BARBER_IMAGES_BUCKET = 'barber-images';
+
+// Upload barber profile image to Storage and return public URL
+export const uploadBarberProfileImage = async (barberId, file) => {
+  if (!supabase) {
+    return { url: null, error: { message: 'Supabase not configured' } };
+  }
+  try {
+    const ext = file.name.split('.').pop() || 'jpg';
+    const path = `barbers/${barberId}/profile.${ext}`;
+    const { error } = await supabase.storage
+      .from(BARBER_IMAGES_BUCKET)
+      .upload(path, file, { upsert: true });
+    if (error) return { url: null, error };
+    const { data: { publicUrl } } = supabase.storage
+      .from(BARBER_IMAGES_BUCKET)
+      .getPublicUrl(path);
+    return { url: publicUrl, error: null };
+  } catch (e) {
+    return { url: null, error: { message: e.message } };
+  }
+};
+
+// Get single barber by id (for gallery page)
+export const getBarberById = async (id) => {
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('barbers')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (error) return { data: null, error };
+      return { data, error: null };
+    } catch (e) {
+      return { data: null, error: { message: e.message } };
+    }
+  }
+  try {
+    const barbers = JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(defaultBarbers));
+    const barber = barbers.find((b) => b.id === id);
+    return { data: barber || null, error: null };
+  } catch (e) {
+    return { data: null, error: { message: e.message } };
+  }
+};
+
+// ============================================
+// BARBER WORK GALLERY (Supabase table + Storage)
+// ============================================
+
+// Get work images for a barber
+export const getBarberWorkImages = async (barberId) => {
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('barber_work_images')
+        .select('*')
+        .eq('barber_id', barberId)
+        .order('display_order', { ascending: true });
+      if (error) return [];
+      return data || [];
+    } catch (e) {
+      return [];
+    }
+  }
+  try {
+    const key = `junestreet_work_${barberId}`;
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : [];
+  } catch (e) {
+    return [];
+  }
+};
+
+// Upload work image: store file in Storage, insert row in barber_work_images
+export const uploadBarberWorkImage = async (barberId, file) => {
+  if (supabase) {
+    try {
+      const ext = file.name.split('.').pop() || 'jpg';
+      const uniqueId = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+      const path = `barbers/${barberId}/work/${uniqueId}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from(BARBER_IMAGES_BUCKET)
+        .upload(path, file, { upsert: false });
+      if (uploadError) return { data: null, error: uploadError };
+      const { data: { publicUrl } } = supabase.storage
+        .from(BARBER_IMAGES_BUCKET)
+        .getPublicUrl(path);
+      const { data: row, error: insertError } = await supabase
+        .from('barber_work_images')
+        .insert([{ barber_id: barberId, image_url: publicUrl, file_path: path, display_order: 999 }])
+        .select()
+        .single();
+      if (insertError) return { data: null, error: insertError };
+      return { data: row, error: null };
+    } catch (e) {
+      return { data: null, error: { message: e.message } };
+    }
+  }
+  try {
+    const key = `junestreet_work_${barberId}`;
+    const stored = localStorage.getItem(key);
+    const list = stored ? JSON.parse(stored) : [];
+    const id = `work-${Date.now()}`;
+    const url = URL.createObjectURL(file);
+    const entry = { id, barber_id: barberId, image_url: url, display_order: list.length };
+    list.push(entry);
+    localStorage.setItem(key, JSON.stringify(list));
+    return { data: entry, error: null };
+  } catch (e) {
+    return { data: null, error: { message: e.message } };
+  }
+};
+
+// Delete work image (Storage + row)
+export const deleteBarberWorkImage = async (barberId, workImageId, filePath = null) => {
+  if (supabase) {
+    try {
+      if (filePath) {
+        await supabase.storage.from(BARBER_IMAGES_BUCKET).remove([filePath]);
+      }
+      const { error } = await supabase
+        .from('barber_work_images')
+        .delete()
+        .eq('id', workImageId);
+      return { error: error || null };
+    } catch (e) {
+      return { error: { message: e.message } };
+    }
+  }
+  try {
+    const key = `junestreet_work_${barberId}`;
+    const stored = localStorage.getItem(key);
+    const list = stored ? JSON.parse(stored) : [];
+    const filtered = list.filter((img) => img.id !== workImageId);
+    localStorage.setItem(key, JSON.stringify(filtered));
+    return { error: null };
+  } catch (e) {
+    return { error: { message: e.message } };
+  }
+};

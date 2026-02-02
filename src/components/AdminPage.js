@@ -6,6 +6,10 @@ import {
   updateBarber, 
   deleteBarber, 
   toggleBarberVisibility,
+  uploadBarberProfileImage,
+  getBarberWorkImages,
+  uploadBarberWorkImage,
+  deleteBarberWorkImage,
   signIn,
   signOut,
   getSession 
@@ -21,6 +25,12 @@ const AdminPage = () => {
   const [loginError, setLoginError] = useState('');
   const [editingBarber, setEditingBarber] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [newBarberProfileFile, setNewBarberProfileFile] = useState(null);
+  const [editingProfileFile, setEditingProfileFile] = useState(null);
+  const [galleryBarber, setGalleryBarber] = useState(null);
+  const [workImages, setWorkImages] = useState([]);
+  const [workImageFile, setWorkImageFile] = useState(null);
+  const [uploadingWork, setUploadingWork] = useState(false);
   const [newBarber, setNewBarber] = useState({
     name: '',
     booking_type: 'external',
@@ -84,6 +94,7 @@ const AdminPage = () => {
     
     const barberData = {
       ...newBarber,
+      image: '/images/placeholder1.jpg',
       booking_link: newBarber.booking_type === 'external' ? newBarber.booking_link : null,
       phone: newBarber.booking_type === 'internal' ? newBarber.phone : null,
       display_order: barbers.length + 1
@@ -94,8 +105,15 @@ const AdminPage = () => {
     if (error) {
       showMessage('error', 'Failed to add barber: ' + error.message);
     } else {
+      if (newBarberProfileFile && data?.id) {
+        const { url, error: uploadErr } = await uploadBarberProfileImage(data.id, newBarberProfileFile);
+        if (!uploadErr && url) {
+          await updateBarber(data.id, { image: url });
+        }
+      }
       showMessage('success', `${newBarber.name} added successfully!`);
       setShowAddForm(false);
+      setNewBarberProfileFile(null);
       setNewBarber({
         name: '',
         booking_type: 'external',
@@ -111,13 +129,17 @@ const AdminPage = () => {
 
   const handleUpdateBarber = async (e) => {
     e.preventDefault();
-    
+    let imageUrl = editingBarber.image;
+    if (editingProfileFile) {
+      const { url, error: uploadErr } = await uploadBarberProfileImage(editingBarber.id, editingProfileFile);
+      if (!uploadErr && url) imageUrl = url;
+    }
     const updates = {
       name: editingBarber.name,
       booking_type: editingBarber.booking_type,
       booking_link: editingBarber.booking_type === 'external' ? editingBarber.booking_link : null,
       phone: editingBarber.booking_type === 'internal' ? editingBarber.phone : null,
-      image: editingBarber.image
+      image: imageUrl
     };
 
     const { error } = await updateBarber(editingBarber.id, updates);
@@ -127,6 +149,7 @@ const AdminPage = () => {
     } else {
       showMessage('success', `${editingBarber.name} updated successfully!`);
       setEditingBarber(null);
+      setEditingProfileFile(null);
       loadBarbers();
     }
   };
@@ -330,8 +353,24 @@ const AdminPage = () => {
                 </div>
                 <div className="barber-actions">
                   <button 
+                    className="action-btn gallery"
+                    onClick={async () => {
+                      setGalleryBarber(barber);
+                      const images = await getBarberWorkImages(barber.id);
+                      setWorkImages(images || []);
+                      setWorkImageFile(null);
+                    }}
+                    title="Work gallery"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </button>
+                  <button 
                     className="action-btn edit"
-                    onClick={() => setEditingBarber(barber)}
+                    onClick={() => { setEditingBarber(barber); setEditingProfileFile(null); }}
                     title="Edit"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -432,13 +471,15 @@ const AdminPage = () => {
                   </div>
                 )}
                 <div className="form-group">
-                  <label>Image URL</label>
+                  <label>Profile photo (upload)</label>
                   <input
-                    type="text"
-                    value={newBarber.image}
-                    onChange={(e) => setNewBarber({ ...newBarber, image: e.target.value })}
-                    placeholder="/images/placeholder.jpg"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setNewBarberProfileFile(e.target.files?.[0] || null)}
                   />
+                  {newBarberProfileFile && (
+                    <span className="form-hint">Selected: {newBarberProfileFile.name}</span>
+                  )}
                 </div>
                 <div className="form-group checkbox">
                   <label>
@@ -465,11 +506,11 @@ const AdminPage = () => {
 
         {/* Edit Barber Modal */}
         {editingBarber && (
-          <div className="modal-overlay" onClick={() => setEditingBarber(null)}>
+          <div className="modal-overlay" onClick={() => { setEditingBarber(null); setEditingProfileFile(null); }}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
                 <h2>Edit {editingBarber.name}</h2>
-                <button className="close-btn" onClick={() => setEditingBarber(null)}>
+                <button className="close-btn" onClick={() => { setEditingBarber(null); setEditingProfileFile(null); }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="18" y1="6" x2="6" y2="18"/>
                     <line x1="6" y1="6" x2="18" y2="18"/>
@@ -520,15 +561,21 @@ const AdminPage = () => {
                   </div>
                 )}
                 <div className="form-group">
-                  <label>Image URL</label>
+                  <label>Profile photo (upload new to replace)</label>
                   <input
-                    type="text"
-                    value={editingBarber.image}
-                    onChange={(e) => setEditingBarber({ ...editingBarber, image: e.target.value })}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setEditingProfileFile(e.target.files?.[0] || null)}
                   />
+                  {editingProfileFile && (
+                    <span className="form-hint">Selected: {editingProfileFile.name}</span>
+                  )}
+                  {editingBarber.image && !editingProfileFile && (
+                    <span className="form-hint">Current image in use</span>
+                  )}
                 </div>
                 <div className="modal-actions">
-                  <button type="button" className="cancel-btn" onClick={() => setEditingBarber(null)}>
+                  <button type="button" className="cancel-btn" onClick={() => { setEditingBarber(null); setEditingProfileFile(null); }}>
                     Cancel
                   </button>
                   <button type="submit" className="save-btn">
@@ -536,6 +583,83 @@ const AdminPage = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Work gallery modal */}
+        {galleryBarber && (
+          <div className="modal-overlay" onClick={() => setGalleryBarber(null)}>
+            <div className="modal gallery-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h2>Work gallery – {galleryBarber.name}</h2>
+                <button className="close-btn" onClick={() => setGalleryBarber(null)}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+              <div className="gallery-upload">
+                <label className="gallery-upload-label">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setWorkImageFile(e.target.files?.[0] || null)}
+                    style={{ display: 'none' }}
+                  />
+                  <span className="gallery-upload-btn">Choose image to upload</span>
+                </label>
+                {workImageFile && (
+                  <button
+                    type="button"
+                    className="save-btn gallery-upload-submit"
+                    disabled={uploadingWork}
+                    onClick={async () => {
+                      if (!workImageFile) return;
+                      setUploadingWork(true);
+                      const { error } = await uploadBarberWorkImage(galleryBarber.id, workImageFile);
+                      setUploadingWork(false);
+                      if (error) {
+                        showMessage('error', 'Upload failed: ' + error.message);
+                      } else {
+                        showMessage('success', 'Image added to gallery.');
+                        setWorkImageFile(null);
+                        const images = await getBarberWorkImages(galleryBarber.id);
+                        setWorkImages(images || []);
+                      }
+                    }}
+                  >
+                    {uploadingWork ? 'Uploading…' : 'Upload'}
+                  </button>
+                )}
+              </div>
+              <div className="gallery-work-list">
+                {workImages.length === 0 ? (
+                  <p className="gallery-empty">No work images yet. Upload above.</p>
+                ) : (
+                  workImages.map((img) => (
+                    <div key={img.id} className="gallery-work-item">
+                      <img src={img.image_url} alt="Work" />
+                      <button
+                        type="button"
+                        className="action-btn delete gallery-delete"
+                        title="Remove"
+                        onClick={async () => {
+                          await deleteBarberWorkImage(galleryBarber.id, img.id, img.file_path);
+                          const images = await getBarberWorkImages(galleryBarber.id);
+                          setWorkImages(images || []);
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="18" y1="6" x2="6" y2="18"/>
+                          <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         )}

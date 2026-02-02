@@ -12,6 +12,7 @@ const BookingsPage = lazy(() => import('./components/BookingsPage'));
 const ContactPage = lazy(() => import('./components/ContactPage'));
 const CareersPage = lazy(() => import('./components/CareersPage'));
 const AdminPage = lazy(() => import('./components/AdminPage'));
+const BarberGalleryPage = lazy(() => import('./components/BarberGalleryPage'));
 
 // Loading spinner component
 const PageLoader = () => (
@@ -23,7 +24,7 @@ const PageLoader = () => (
 // Layout wrapper to conditionally show Navbar/Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isAdminPage = location.pathname.startsWith('/admin');
+  const isAdminPage = location.pathname.startsWith('/admin') || location.pathname === '/jsadmin';
 
   return (
     <div className="App">
@@ -45,6 +46,7 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/bookings" element={<BookingsPage />} />
+          <Route path="/barber/:id" element={<BarberGalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/jsadmin" element={<AdminPage />} />

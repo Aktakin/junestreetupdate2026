@@ -1,0 +1,189 @@
+/* Barber Gallery Page */
+.barber-gallery-page {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 80px;
+  background: #0a0a0a;
+}
+
+.barber-gallery-loading,
+.barber-gallery-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.barber-gallery-error {
+  margin-bottom: 1rem;
+}
+
+.barber-gallery-hero {
+  padding: 80px 20px 60px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.barber-gallery-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 32px;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.barber-gallery-back:hover {
+  color: #268BBA;
+}
+
+.barber-gallery-profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  max-width: 900px;
+}
+
+.barber-gallery-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(38, 139, 186, 0.4);
+  flex-shrink: 0;
+}
+
+.barber-gallery-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.barber-gallery-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.barber-gallery-info .page-title {
+  margin-bottom: 8px;
+}
+
+.barber-gallery-tagline {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
+}
+
+.barber-gallery-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #268BBA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.barber-gallery-book-btn:hover {
+  background: #1e6d94;
+  transform: translateY(-1px);
+}
+
+.barber-gallery-work {
+  padding: 60px 20px 100px;
+}
+
+.barber-gallery-work-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.barber-gallery-empty {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+}
+
+.barber-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.barber-gallery-item {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.barber-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Reuse booking section styles from BookingsPage when showing call card */
+.barber-gallery-page .booking-options-section {
+  padding: 40px 20px 80px;
+}
+
+.barber-gallery-page .booking-options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.barber-gallery-page .btn-back-barbers {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.barber-gallery-page .btn-back-barbers:hover {
+  border-color: #268BBA;
+  color: #268BBA;
+}
+
+@media (max-width: 600px) {
+  .barber-gallery-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+  .barber-gallery-avatar {
+    width: 140px;
+    height: 140px;
+  }
+  .barber-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}

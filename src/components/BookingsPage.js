@@ -5,7 +5,6 @@ import './BookingsPage.css';
 
 const BookingsPage = () => {
   const navigate = useNavigate();
-  const [selectedBarber, setSelectedBarber] = useState(null);
   const [barbers, setBarbers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,81 +21,8 @@ const BookingsPage = () => {
 
 
   const handleBarberClick = (barber) => {
-    if (barber.booking_type === 'external') {
-      window.open(barber.booking_link, '_blank');
-    } else {
-      setSelectedBarber(barber);
-    }
+    navigate(`/barber/${barber.id}`);
   };
-
-  const goBack = () => {
-    setSelectedBarber(null);
-  };
-
-  // Internal booking - Call card only
-  if (selectedBarber) {
-    return (
-      <div className="bookings-page">
-        <section className="bookings-hero">
-          <div className="container">
-            <div className="hero-content-bookings">
-              <span className="page-label">Book with {selectedBarber.name}</span>
-              <h1 className="page-title">How Would You Like to Book?</h1>
-              <p className="page-description">
-                Choose your preferred booking method below.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="booking-options-section">
-          <div className="container">
-            <div className="booking-options-grid">
-              {/* Call Barber Card */}
-              <div className="booking-option-card call-card">
-                <div className="option-card-header">
-                  <div className="option-card-icon call">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
-                  </div>
-                  <div className="option-card-title">
-                    <h3>Call {selectedBarber.name}</h3>
-                    <p>Book directly by phone</p>
-                  </div>
-                </div>
-                <div className="option-card-content always-open">
-                  <div className="call-barber-phone">{selectedBarber.phone}</div>
-                  <p className="call-barber-hint">Tap to call or text directly</p>
-                  <div className="call-barber-actions">
-                    <a href={`tel:${selectedBarber.phone.replace(/[^0-9+]/g, '')}`} className="call-action-btn call">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                      </svg>
-                      Call Now
-                    </a>
-                    <a href={`sms:${selectedBarber.phone.replace(/[^0-9+]/g, '')}`} className="call-action-btn text">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                      </svg>
-                      Send Text
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button className="btn-back-barbers" onClick={goBack}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-              Back to Barbers
-            </button>
-          </div>
-        </section>
-      </div>
-    );
-  }
 
   // Main barber selection screen
   return (

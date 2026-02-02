@@ -60,7 +60,43 @@ CREATE POLICY "Public can view visible barbers" ON barbers
 -- Policy: Authenticated users can do everything
 CREATE POLICY "Authenticated users have full access" ON barbers
   FOR ALL USING (auth.role() = 'authenticated');
+
+-- Create barber work images table (gallery per barber)
+CREATE TABLE barber_work_images (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  barber_id UUID NOT NULL REFERENCES barbers(id) ON DELETE CASCADE,
+  image_url TEXT NOT NULL,
+  file_path TEXT,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE barber_work_images ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can view work images" ON barber_work_images
+  FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated users manage work images" ON barber_work_images
+  FOR ALL USING (auth.role() = 'authenticated');
 ```
+
+---
+
+## Step 3b: Create Storage Bucket for Barber Images
+
+1. Go to **Storage** in the left sidebar
+2. Click **New bucket**
+3. Name: `barber-images`
+4. Check **Public bucket** (so gallery images are viewable without auth)
+5. Click **Create bucket**
+6. Open the bucket → **Policies** tab → **New policy**
+7. For **Upload**: Create policy "Authenticated upload" – allow `INSERT` for authenticated users on path `barbers/*`
+8. For **Delete**: Create policy "Authenticated delete" – allow `DELETE` for authenticated users on path `barbers/*`
+9. (Public read is automatic for public buckets.)
+
+Or run in SQL Editor (Storage policies can be set in Dashboard):
+
+- In **Storage** → **barber-images** → **Policies**: Add policy for **INSERT** and **DELETE** with expression `auth.role() = 'authenticated'` and path prefix `barbers/`.
 
 ---
 
