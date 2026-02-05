@@ -9,14 +9,6 @@ const HomePage = () => {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(testimonialInterval);
-  }, []);
-
-
-  useEffect(() => {
     // Simulate page loading - wait for images and content to load
     const images = document.querySelectorAll('img');
     let loadedImages = 0;
@@ -135,6 +127,13 @@ const HomePage = () => {
       image: '/images/placeholder.jpg'
     }
   ];
+
+  useEffect(() => {
+    const testimonialInterval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(testimonialInterval);
+  }, [testimonials.length]);
 
   const socialLinks = [
     { 
