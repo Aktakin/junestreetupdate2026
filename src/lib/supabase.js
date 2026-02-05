@@ -50,7 +50,7 @@ const VINO_WORK_GALLERY = [
 // Returns work images to display: API images first, then any static gallery for this barber
 export const getBarberWorkImagesForDisplay = (barber, apiWorkImages) => {
   const list = Array.isArray(apiWorkImages) ? [...apiWorkImages] : [];
-  const name = (barber && barber.name || '').toLowerCase().trim();
+  const name = ((barber && barber.name) || '').toLowerCase().trim();
   if (name === 'vino' && VINO_WORK_GALLERY.length) {
     list.push(...VINO_WORK_GALLERY);
   }
