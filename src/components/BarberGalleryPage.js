@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBarberById, getBarberWorkImages } from '../lib/supabase';
+import { getBarberById, getBarberWorkImages, getBarberWorkImagesForDisplay, getBarberDisplayImage } from '../lib/supabase';
 import './BarberGalleryPage.css';
 import './BookingsPage.css';
 
@@ -130,7 +130,7 @@ const BarberGalleryPage = () => {
           </button>
           <div className="barber-gallery-profile">
             <div className="barber-gallery-avatar">
-              <img src={barber.image || '/images/placeholder.jpg'} alt={barber.name} />
+              <img src={getBarberDisplayImage(barber)} alt={barber.name} />
             </div>
             <div className="barber-gallery-info">
               <span className="page-label">Barber</span>
@@ -150,17 +150,46 @@ const BarberGalleryPage = () => {
       <section className="barber-gallery-work">
         <div className="container">
           <h2 className="barber-gallery-work-title">Work Gallery</h2>
-          {workImages.length === 0 ? (
-            <p className="barber-gallery-empty">No work photos yet. Check back soon.</p>
-          ) : (
-            <div className="barber-gallery-grid">
-              {workImages.map((img) => (
-                <div key={img.id} className="barber-gallery-item">
-                  <img src={img.image_url} alt={`Work by ${barber.name}`} loading="lazy" />
+          {(() => {
+            const displayImages = getBarberWorkImagesForDisplay(barber, workImages);
+            if (displayImages.length === 0) {
+              return (
+                <div className="barber-gallery-empty-wrap">
+                  <p className="barber-gallery-empty">
+                    {`Fresh cuts from ${barber.name} are coming soon. Work added in the admin will show here.`}
+                  </p>
+                  <div className="barber-gallery-grid barber-gallery-grid-placeholders">
+                    {Array.from({ length: 4 }).map((_, idx) => (
+                      <div key={idx} className="barber-gallery-item placeholder-card">
+                        <div className="barber-gallery-placeholder-inner">
+                          <span>+</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
+              );
+            }
+            return (
+              <div className="barber-gallery-grid">
+                {displayImages.map((img) => (
+                  <div key={img.id} className="barber-gallery-item">
+                    {img.type === 'video' ? (
+                      <video
+                        src={img.image_url}
+                        controls
+                        playsInline
+                        preload="metadata"
+                        aria-label={`Work by ${barber.name}`}
+                      />
+                    ) : (
+                      <img src={img.image_url} alt={`Work by ${barber.name}`} loading="lazy" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
     </div>

@@ -10,6 +10,7 @@ import {
   getBarberWorkImages,
   uploadBarberWorkImage,
   deleteBarberWorkImage,
+  getBarberDisplayImage,
   signIn,
   signOut,
   getSession 
@@ -335,7 +336,7 @@ const AdminPage = () => {
                 className={`barber-item ${!barber.is_visible ? 'hidden-barber' : ''}`}
               >
                 <div className="barber-avatar">
-                  <img src={barber.image} alt={barber.name} />
+                  <img src={getBarberDisplayImage(barber)} alt={barber.name} />
                   {!barber.is_visible && (
                     <span className="hidden-badge">Hidden</span>
                   )}

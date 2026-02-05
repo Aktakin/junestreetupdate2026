@@ -119,6 +119,13 @@
 .barber-gallery-empty {
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+.barber-gallery-empty-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .barber-gallery-grid {
@@ -134,11 +141,27 @@
   background: #1a1a1a;
 }
 
-.barber-gallery-item img {
+.barber-gallery-item img,
+.barber-gallery-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.barber-gallery-grid-placeholders .barber-gallery-item.placeholder-card {
+  background: #111111;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.barber-gallery-placeholder-inner {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 2.2rem;
+  line-height: 1;
 }
 
 /* Reuse booking section styles from BookingsPage when showing call card */

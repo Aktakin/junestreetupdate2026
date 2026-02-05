@@ -21,6 +21,42 @@ if (supabaseUrl && supabaseAnonKey) {
 const STORAGE_KEY = 'junestreet_barbers';
 const AUTH_KEY = 'junestreet_auth';
 
+// Profile images in public/images (name "BarberName profile.jpeg") – used when DB has placeholder
+const BARBER_PROFILE_IMAGES = {
+  'vino': '/images/vino profile.jpeg',
+  'kp': '/images/kp profile.jpeg',
+  'coffey': '/images/coffey profile.jpeg',
+  'sayla v': '/images/sayla v profile.jpeg',
+};
+
+// Get display image for a barber: use custom profile image if we have one, else barber.image
+export const getBarberDisplayImage = (barber) => {
+  if (!barber) return '/images/placeholder.jpg';
+  const normalized = (barber.name || '').toLowerCase().trim();
+  if (BARBER_PROFILE_IMAGES[normalized]) return BARBER_PROFILE_IMAGES[normalized];
+  return barber.image || '/images/placeholder.jpg';
+};
+
+// Static work gallery (images + videos) in public/images – merged for display
+const VINO_WORK_GALLERY = [
+  { id: 'vino-work-1', image_url: '/images/Vino work gallery1.jpeg' },
+  { id: 'vino-work-2', image_url: '/images/vino work gallery2.jpeg' },
+  { id: 'vino-work-3', image_url: '/images/vino work gallery3.mp4', type: 'video' },
+  { id: 'vino-work-4', image_url: '/images/vino work gallerry4 .mp4', type: 'video' },
+  { id: 'vino-work-5', image_url: '/images/vino work gallery 5.mp4', type: 'video' },
+  { id: 'vino-work-6', image_url: '/images/vino work gallery 6.mp4', type: 'video' },
+];
+
+// Returns work images to display: API images first, then any static gallery for this barber
+export const getBarberWorkImagesForDisplay = (barber, apiWorkImages) => {
+  const list = Array.isArray(apiWorkImages) ? [...apiWorkImages] : [];
+  const name = (barber && barber.name || '').toLowerCase().trim();
+  if (name === 'vino' && VINO_WORK_GALLERY.length) {
+    list.push(...VINO_WORK_GALLERY);
+  }
+  return list;
+};
+
 // Default barbers data (for localStorage fallback)
 const defaultBarbers = [
   {

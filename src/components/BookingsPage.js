@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getBarbers } from '../lib/supabase';
+import { getBarbers, getBarberDisplayImage } from '../lib/supabase';
 import './BookingsPage.css';
 
 const BookingsPage = () => {
@@ -59,7 +59,7 @@ const BookingsPage = () => {
                   style={{ '--delay': `${index * 0.1}s` }}
                 >
                   <div className="barber-select-image">
-                    <img src="/images/placeholder.jpg" alt={barber.name} />
+                    <img src={getBarberDisplayImage(barber)} alt={barber.name} />
                     <div className="barber-select-overlay">
                       <span className="book-label">
                         {barber.booking_type === 'external' ? 'Book Online' : 'Book Now'}
